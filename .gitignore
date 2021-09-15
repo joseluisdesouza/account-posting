@@ -20,6 +20,7 @@ target/
 *.ipr
 
 ### NetBeans ###
+metadata/plugins/org.eclipse
 /nbproject/private/
 /nbbuild/
 /dist/
