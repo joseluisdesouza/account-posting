@@ -1,9 +1,9 @@
-package com.project.accountposting.controller;
+package com.project.accountposting.resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/title")
+public class TitleResource {
 }
