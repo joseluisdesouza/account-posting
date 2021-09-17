@@ -22,6 +22,6 @@ public class User {
     private String email;
     private String password;
     @Positive
-    private int activated;
+    private Integer activated;
     private List<Role> roles;
 }

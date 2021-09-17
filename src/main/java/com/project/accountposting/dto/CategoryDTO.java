@@ -10,6 +10,6 @@ import lombok.*;
 public class CategoryDTO {
 
     private Long id;
-    private int activated;
+    private Integer activated;
     private String description;
 }

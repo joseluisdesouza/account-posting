@@ -20,6 +20,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Positive
-    private int activated;
+    private Integer activated;
     private String description;
 }
