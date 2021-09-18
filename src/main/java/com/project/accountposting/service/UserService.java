@@ -47,8 +47,8 @@ public class UserService {
         userRepository.deleteById(user.getId());
     }
 
-    private User getUserById(final Long userId) {
-        return userRepository.findById(userId).orElseThrow(() ->
+    private User getUserById(final Long id) {
+        return userRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 

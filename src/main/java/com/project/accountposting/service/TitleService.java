@@ -13,8 +13,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
-import static java.util.Objects.isNull;
-
 @Service
 @RequiredArgsConstructor
 public class TitleService {
@@ -34,7 +32,7 @@ public class TitleService {
     }
 
     public TitleDTO update(Long id, TitleDTO titleDTO) {
-        var title = getById(id);
+        var title = getTitleById(id);
         title.setId(titleDTO.getId());
         title.setCategoryId(titleDTO.getCategoryId());
         title.setCreateDate(titleDTO.getCreateDate());
@@ -49,14 +47,13 @@ public class TitleService {
     }
 
     public void delete(Long id) {
-        getById(id);
+        getTitleById(id);
         titleRepository.deleteById(id);
     }
 
-    private Title getById(Long id) {
-        if (isNull(id))
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return titleRepository.getById(id);
+    private Title getTitleById(final Long id) {
+        return titleRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     private Title toEntity(TitleDTO titleDTO) {
