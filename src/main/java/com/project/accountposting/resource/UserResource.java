@@ -1,6 +1,7 @@
 package com.project.accountposting.resource;
 
 import com.project.accountposting.dto.UserDTO;
+import com.project.accountposting.dto.UserResponseDTO;
 import com.project.accountposting.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,7 +35,7 @@ public class UserResource {
     }
 
     @PutMapping("/{id}")
-    public UserDTO update(@PathVariable Long id, UserDTO userDTO) {
+    public UserResponseDTO update(@PathVariable Long id, UserDTO userDTO) {
         return userService.update(id, userDTO);
     }
 

@@ -13,10 +13,11 @@ import javax.persistence.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//manter o padrão dos nomes de tabelas
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String authorities;
+    private String authorities;// conferir na especificação o nome certo
 }

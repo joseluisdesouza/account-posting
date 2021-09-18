@@ -14,13 +14,14 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//manter o padrão dos nomes de tabelas
 public class History {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long titleId;
-    private Long userId;
+    private Long titleId;//usar a entidade
+    private Long userId;//usar a entidade
     private Instant createDate;
     private String description;
 }

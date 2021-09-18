@@ -28,6 +28,7 @@ public class CategoryResource {
                                      @RequestParam(defaultValue = "10") Integer linesPerPage,
                                      @RequestParam(defaultValue = "description") String orderBy,
                                      @RequestParam(defaultValue = "ASC") Sort.Direction direction) {
+
         return categoryService.findAll(id, description, PageRequest.of(page, linesPerPage, Sort.by(direction, orderBy)));
     }
 

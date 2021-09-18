@@ -2,6 +2,7 @@ package com.project.accountposting.service;
 
 import com.project.accountposting.domain.User;
 import com.project.accountposting.dto.UserDTO;
+import com.project.accountposting.dto.UserResponseDTO;
 import com.project.accountposting.repository.UserRepository;
 import com.project.accountposting.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserDTO create(UserDTO userDTO) {
+
+        //colcoar regra para insertir o acteveted
         return new UserDTO(userRepository.save(toDTO(userDTO)));
     }
 
@@ -32,16 +35,22 @@ public class UserService {
                 .build(), pageable).map(UserDTO::new);
     }
 
-    public UserDTO update(Long id, UserDTO userDTO) {
+    public UserResponseDTO update(Long id, UserDTO userDTO) {
         var user = getUserById(id);
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setActivated(userDTO.getActivated());
-        user.setRoles(userDTO.getRoles());
-        return new UserDTO(userRepository.save(user));
+      //  user.setRoles(userDTO.getRoles());
+        final var userUpdated = userRepository.save(user);
+        return new UserResponseDTO(userUpdated);
     }
 
+    /**
+     * DELETE: para desativação do registro, note que nesse caso vamos passar o valor 0 para o
+     * atributo “activated”
+     * @param id
+     */
     public void delete(Long id) {
         var user = getUserById(id);
         userRepository.deleteById(user.getId());
@@ -59,7 +68,7 @@ public class UserService {
                 .email(userDTO.getEmail())
                 .password(userDTO.getPassword())
                 .activated(userDTO.getActivated())
-                .roles(userDTO.getRoles())
+             //   .roles(userDTO.getRoles())
                 .build();
     }
 }

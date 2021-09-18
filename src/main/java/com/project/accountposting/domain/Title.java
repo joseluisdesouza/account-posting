@@ -17,12 +17,13 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//manter o padrão dos nomes de tabelas
 public class Title {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long categoryId;
+    private Long categoryId;// Usar a entidade
     private Instant createDate;
     private Instant paymentDate;
     private Instant expirationDate;

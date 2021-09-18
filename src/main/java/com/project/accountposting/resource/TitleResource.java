@@ -37,6 +37,7 @@ public class TitleResource {
     }
 
     //preciso verificar esse metodo ainda
+    //Criar um DTo de Payment só com as informações necessarias
 //    @PutMapping("/payment{id}")
 //    public TitleDTO update(@PathVariable Long id, @Validated @RequestBody TitleDTO titleDTO) {
 //        return titleService.update(id, titleDTO);

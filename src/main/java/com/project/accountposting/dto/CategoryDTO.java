@@ -3,6 +3,9 @@ package com.project.accountposting.dto;
 import com.project.accountposting.domain.Category;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Data
 @With
 @Builder
@@ -11,7 +14,9 @@ import lombok.*;
 public class CategoryDTO {
 
     private Long id;
+    @NotNull
     private Integer activated;
+    @NotBlank
     private String description;
 
     public CategoryDTO(Category category){

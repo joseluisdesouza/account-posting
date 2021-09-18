@@ -11,20 +11,18 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserResponseDTO {
 
     private Long id;
     private String name;
     private String email;
-    private String password;
     private Integer activated;//deve ser informado na service, sempre que for criado
     private List<Role> roles;
 
-    public UserDTO(User user) {
+    public UserResponseDTO(User user) {
         id = user.getId();
         name = user.getName();
         email = user.getEmail();
-        password = user.getPassword();
         activated = user.getActivated();
    //     roles = user.getRoles();
     }

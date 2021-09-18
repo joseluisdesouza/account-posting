@@ -42,9 +42,16 @@ public class CategoryService {
 
     }
 
+
+    /**
+     * Para a especificação funcional esta errado
+     * DELETE: para desativação do registro, note que nesse caso vamos passar o valor 0 para o
+     * atributo “activated”
+     * @param id
+     */
     public void delete(final Long id) {
-        getCategoryById(id);
-        categoryRepository.deleteById(id);
+
+        categoryRepository.deleteById(getCategoryById(id).getId());
     }
 
     private Category getCategoryById(Long id) {
