@@ -12,8 +12,8 @@ import java.time.Instant;
 public class HistoryDTO {
 
     private Long id;
-    private Long titleId;
-    private Long userId;
+    private TitleDTO titleDTO;
+    private UserDTO userDTO;
     private Instant createDate;
     private String description;
 }

@@ -39,8 +39,8 @@ public class UserResource {
         return userService.update(id, userDTO);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        userService.delete(id);
+    @PutMapping("/{id}")
+    public UserDTO deactivation(@PathVariable Long id, UserDTO userDTO) {
+        return userService.deactivation(id, userDTO);
     }
 }

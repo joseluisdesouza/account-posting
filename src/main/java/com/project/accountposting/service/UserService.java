@@ -23,7 +23,8 @@ public class UserService {
     public UserDTO create(UserDTO userDTO) {
 
         //colcoar regra para insertir o acteveted
-        return new UserDTO(userRepository.save(toDTO(userDTO)));
+        return new UserDTO(userRepository.save(toDTO(userDTO))
+                .withActivated(1));
     }
 
     public Page<UserDTO> findAll(Optional<Long> id,
@@ -37,11 +38,12 @@ public class UserService {
 
     public UserResponseDTO update(Long id, UserDTO userDTO) {
         var user = getUserById(id);
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
-        user.setActivated(userDTO.getActivated());
-      //  user.setRoles(userDTO.getRoles());
+//        user.setName(userDTO.getName());
+//        user.setEmail(userDTO.getEmail());
+//        user.setPassword(userDTO.getPassword());
+//        user.setActivated(userDTO.getActivated());
+        user.setDescription(userDTO.getDescription()); //atualizar somente a descrição como esta na especificação PUT: para atualização da descrição;
+        //  user.setRoles(userDTO.getRoles());
         final var userUpdated = userRepository.save(user);
         return new UserResponseDTO(userUpdated);
     }
@@ -49,11 +51,13 @@ public class UserService {
     /**
      * DELETE: para desativação do registro, note que nesse caso vamos passar o valor 0 para o
      * atributo “activated”
+     *
      * @param id
      */
-    public void delete(Long id) {
+    public UserDTO deactivation(Long id, UserDTO userDTO) {
         var user = getUserById(id);
-        userRepository.deleteById(user.getId());
+        userDTO.setActivated(0);
+        return new UserDTO(userRepository.save(user));
     }
 
     private User getUserById(final Long id) {
@@ -68,7 +72,7 @@ public class UserService {
                 .email(userDTO.getEmail())
                 .password(userDTO.getPassword())
                 .activated(userDTO.getActivated())
-             //   .roles(userDTO.getRoles())
+                //   .roles(userDTO.getRoles())
                 .build();
     }
 }

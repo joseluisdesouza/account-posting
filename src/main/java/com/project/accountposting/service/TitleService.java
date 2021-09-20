@@ -2,6 +2,7 @@ package com.project.accountposting.service;
 
 import com.project.accountposting.domain.Title;
 import com.project.accountposting.dto.TitleDTO;
+import com.project.accountposting.enums.SituationEnum;
 import com.project.accountposting.repository.TitleRepository;
 import com.project.accountposting.specification.TitleSpecification;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -25,16 +27,16 @@ public class TitleService {
      *
      * @param titleDTO
      * @return
+     *
+     * "informa a data de criação do titulo";
+     * "todo titulo que passa aqui ele entra como pendente";
      */
     public TitleDTO create(TitleDTO titleDTO) {
-
-        var a = "informa a data de criação do titulo";
-        var b = "todo titulo que passa aqui ele entra como pendente";
-
-        var t = titleRepository.save(toEntity(titleDTO));
+        var title = titleRepository.save(toEntity(titleDTO))
+                .withCreateDate(Instant.now())
+                .withSituation(SituationEnum.PENDING);
         // inserir historico
-
-        return new TitleDTO(t);
+        return new TitleDTO(title);
     }
 
     public Page<TitleDTO> findAll(Optional<Long> id,
@@ -59,11 +61,9 @@ public class TitleService {
         var title = getTitleById(id);
         title.setId(titleDTO.getId());
         title.setCategoryId(titleDTO.getCategoryId());
-        title.setCreateDate(titleDTO.getCreateDate());
         title.setPaymentDate(titleDTO.getPaymentDate());
         title.setExpirationDate(titleDTO.getExpirationDate());
         title.setType(titleDTO.getType());
-        title.setSituation(titleDTO.getSituation());
         title.setDescription(titleDTO.getDescription());
         title.setDiscount(titleDTO.getDiscount());
         title.setValue(titleDTO.getValue());
@@ -90,9 +90,10 @@ public class TitleService {
      *
      * @param id
      */
-    public void delete(Long id) {
-        getTitleById(id);
-        titleRepository.deleteById(id);
+    public TitleDTO deactivation(Long id, TitleDTO titleDTO) {
+        var title = getTitleById(id);
+        title.setSituation(SituationEnum.CANCELED);
+        return new TitleDTO(titleRepository.save(title));
     }
 
     private Title getTitleById(final Long id) {
@@ -104,7 +105,6 @@ public class TitleService {
         return Title.builder()
                 .id(titleDTO.getId())
                 .categoryId(titleDTO.getCategoryId())
-                .createDate(titleDTO.getCreateDate())
                 .paymentDate(titleDTO.getPaymentDate())
                 .expirationDate(titleDTO.getExpirationDate())
                 .build();

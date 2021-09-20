@@ -23,6 +23,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String description;
     @Positive //deve ficar no dto de update
     private Integer activated;
 

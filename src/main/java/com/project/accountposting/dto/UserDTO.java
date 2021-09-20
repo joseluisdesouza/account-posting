@@ -17,6 +17,7 @@ public class UserDTO {
     private String name;
     private String email;
     private String password;
+    private String description;
     private Integer activated;//deve ser informado na service, sempre que for criado
     private List<Role> roles;
 
@@ -26,6 +27,7 @@ public class UserDTO {
         email = user.getEmail();
         password = user.getPassword();
         activated = user.getActivated();
+        description = user.getDescription();
    //     roles = user.getRoles();
     }
 }

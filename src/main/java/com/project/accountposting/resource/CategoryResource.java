@@ -32,13 +32,13 @@ public class CategoryResource {
         return categoryService.findAll(id, description, PageRequest.of(page, linesPerPage, Sort.by(direction, orderBy)));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public CategoryDTO update(@PathVariable Long id, @Validated @RequestBody CategoryDTO categoryDTO) {
         return categoryService.update(id, categoryDTO);
     }
 
-    @DeleteMapping
-    public void delete(@PathVariable Long id) {
-        categoryService.delete(id);
+    @PutMapping("/{id}")
+    public void deactivation(@PathVariable Long id, @Validated @RequestBody CategoryDTO categoryDTO) {
+        categoryService.deactivation(id, categoryDTO);
     }
 }

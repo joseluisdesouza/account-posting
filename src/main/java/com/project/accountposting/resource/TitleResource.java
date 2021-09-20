@@ -43,8 +43,8 @@ public class TitleResource {
 //        return titleService.update(id, titleDTO);
 //    }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        titleService.delete(id);
+    @PutMapping("/{id}")
+    public TitleDTO delete(@PathVariable Long id, @Validated @RequestBody TitleDTO titleDTO) {
+        return titleService.update(id, titleDTO);
     }
 }
